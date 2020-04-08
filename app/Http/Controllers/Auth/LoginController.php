@@ -37,4 +37,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // Where login with phone?
 }

@@ -32,7 +32,7 @@ class WelcomeEmail extends Mailable
     {
         $subject = 'Welcome to login test!';
         
-        return $this->view('emails.welcome')
+        return $this->view('emails.welcome') // view('emails.welcome', [try to add multiple variables here])
                     ->subject($subject)
                     ->with([ 'name' => $this->user['name']]);
     }

@@ -34,6 +34,6 @@ class WelcomeEmail extends Mailable
         
         return $this->view('emails.welcome')
                     ->subject($subject)
-                    ->with([ 'name' => $this->user['name']]);
+                    ->with(['name' => $this->user['frist_name'],'lastName' => $this->user['last_name']]);
     }
 }

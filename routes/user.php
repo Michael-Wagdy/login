@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| user Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -11,8 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', 'HomeController@index')->name('home');
 
+Auth::routes();
+Route::get('profile','auth\user\UserController@updatePasswordView');
+Route::post('profile','auth\user\UserController@updatePassword')->name('updatePassword');
+Route::post('register','auth\RegisterController@register')->name('postRegister');
+?>

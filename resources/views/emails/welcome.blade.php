@@ -7,7 +7,8 @@
 </head>
 <body>
 
-    <p> Dear {{$user['name']}},</p>
+    <p> Dear {{$name ." ".$lastName}}</p>
+  
     <p> welcome to our website</p>    
 </body>
 </html>

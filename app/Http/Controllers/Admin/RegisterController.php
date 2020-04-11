@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Admin;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,15 +50,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        
         return Validator::make($data, [
-            'frist_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'telephone' => ['required', 'string','min:11', 'max:12'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'gender'=> 'in:male,female',
-            'dob' => ['date'],
+            'admin_flag'=> 'in:0,1',
         ]);
     }
 
@@ -70,15 +66,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+
         return User::create([
-            'frist_name' => $data['frist_name'],
-            'last_name' => $data['last_name'],
+            'name' => $data['name'],
             'email' => $data['email'],
-            'telephone' => $data['telephone'],
-            'gender' => $data['gender'],
+            'admin_flag' => $data['admin_flag'],
             'password' => Hash::make($data['password']),
-            'dob' => $data['dob'],
         ]);
     }
 }

@@ -1,12 +1,11 @@
 <?php
 
 namespace App;
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -15,13 +14,13 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $dates = ['dob', 'created_at', 'updated_at']; 
+    protected $dates = [ 'created_at', 'updated_at']; 
     public function getSomeDateAttribute($date)
 {
     return $date->format('d-m-y');
 }
        protected $fillable = [
-        'frist_name','last_name', 'email', 'password','telephone','dob','gender'
+        'name', 'email', 'password','admin_flag',
     ];
 
     /**

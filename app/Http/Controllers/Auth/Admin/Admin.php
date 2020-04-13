@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\auth\admin;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
@@ -18,7 +18,7 @@ class Admin extends Controller
     public function login(){
         //check if there is already user logged in from this browser
         abort_if(Gate::denies(Auth::user()), redirect('home'));
-        abort_if(Gate::denies(Auth::guard('webadmin')), redirect('home'));
+        // abort_if(Gate::denies(Auth::guard('webadmin')), redirect('home'));
 
         return view('auth.admin.login');
 
@@ -73,6 +73,13 @@ class Admin extends Controller
      
 
 }
+    public function countAdmins(){
+        abort_if(Gate::denies(Auth::user()), redirect('home'));
+        
+        $noOfAdmins = count(AppAdmin::get('name'));
+        return "there are".$noOfAdmins . "  registered";
+
+    }
 
 
 }

@@ -12,8 +12,22 @@
 */
 
 
-Auth::routes();
-Route::get('profile','auth\user\UserController@updatePasswordView');
-Route::post('profile','auth\user\UserController@updatePassword')->name('updatePassword');
-Route::post('register','auth\RegisterController@register')->name('postRegister');
-?>
+Route::get('profile','UserController@updatePasswordView');
+Route::post('profile','UserController@updatePassword')->name('updatePassword');
+
+
+//Authentication routes
+Route::get('login','LoginController@showLoginForm')->name('login');
+Route::post('login','LoginController@login');
+Route::post('logout','LoginController@logout')->name('logout');
+
+
+// Registration routes
+Route::post('register','RegisterController@register')->name('postRegister');
+Route::get('register','RegisterController@register');
+
+//password Reset Routes
+Route::get('passwords/reset','ForgotPasswordController@showLinkRequestForm');
+Route::post('passwords/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('passwords/reset/{token}','ResetPasswordController@showResetForm');
+Route::post('Passwords/rest','ResetPasswordController@reset')->name('password.reset');

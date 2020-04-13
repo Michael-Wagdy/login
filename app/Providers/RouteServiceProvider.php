@@ -15,6 +15,8 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $adminNamespace = 'App\Http\Controllers\Auth\Admin';
+    protected $userNamespace = 'App\Http\Controllers\Auth\User';
 
     /**
      * The path to the "home" route for your application.
@@ -86,7 +88,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('user')
              ->middleware('web')
-             ->namespace($this->namespace)
+             ->namespace($this->userNamespace)
              ->group(base_path('routes/user.php'));
 
         
@@ -95,6 +97,6 @@ protected function mapAdminRoutes()
 {
     Route::prefix('admin')
          ->middleware('web')
-         ->namespace($this->namespace)
+         ->namespace($this->adminNamespace)
          ->group(base_path('routes/admin.php'));
 }}

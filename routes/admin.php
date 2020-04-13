@@ -10,10 +10,9 @@
 | contains the "admin" middleware group. Now create something great!
 |
 */
-Route::get('dashboard', function(){
-    return "test admin path";
-})->middleware('Authadmin:webadmin');
-Route::get('login','admin\Admin@login');
-Route::post('login','admin\Admin@login_post')->name('adminLogin');
-Route::get('profile','admin\Admin@updatePasswordView');
-Route::post('profile','admin\Admin@updatePassword')->name('updateAdminPassword');
+Route::get('dashboard', 'Admin@countAdmins')
+->middleware('Authadmin:webadmin');
+Route::get('login','Admin@login');
+Route::post('login','Admin@login_post')->name('adminLogin');
+Route::get('profile','Admin@updatePasswordView');
+Route::post('profile','Admin@updatePassword')->name('updateAdminPassword');

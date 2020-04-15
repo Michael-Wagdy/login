@@ -12,7 +12,7 @@
 */
 Route::get('dashboard', 'AdminController@countAdmins')
 ->middleware('Authadmin:webadmin');
-Route::get('login','AdminController@login');
-Route::post('login','AdminController@login_post')->name('adminLogin');
+Route::get('login','AdminController@showLoginForm');
+Route::post('login','AdminController@login')->name('adminLogin');
 Route::get('profile','AdminController@updatePasswordView');
 Route::post('profile','AdminController@updatePassword')->name('updateAdminPassword');

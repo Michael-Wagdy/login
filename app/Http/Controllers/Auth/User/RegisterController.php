@@ -81,4 +81,15 @@ class RegisterController extends Controller
             'dob' => $data['dob'],
         ]);
     }
+
+
+       /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('auth.user.register');
+    }
 }

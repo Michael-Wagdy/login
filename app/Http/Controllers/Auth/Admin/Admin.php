@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
-class Admin extends Controller
+class AdminController extends Controller
 {
     //
     public function login(){
@@ -76,9 +76,11 @@ class Admin extends Controller
     public function countAdmins(){
         abort_if(Gate::denies(Auth::user()), redirect('home'));
         
-        $noOfAdmins = count(AppAdmin::get('name'));
-        return "there are".$noOfAdmins . "  registered";
+        // $noOfAdmins = count(AppAdmin::get('name'));
+        // return "there are".$noOfAdmins . "  registered";
 
+
+        return view('auth.admin.dashboard');
     }
 
 

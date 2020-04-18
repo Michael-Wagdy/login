@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,15 +32,28 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    protected $filename = '';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
+        
+        if($request->hasFile('avatar')){
+            $avatar= $request->file('avatar');
+            $filename=time().'.'.$avatar->getClientOriginalExtension();
+            $this->filename=  $filename;
+
+            $avatar->storeAs('public/uploads/avatars',$filename);
+            }
+
+
         $this->middleware('guest');
+       
+            
     }
 
     /**
@@ -58,14 +72,18 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'gender'=> 'in:male,female',
+            'avatar' => 'image|max:1999',
             'dob' => ['date'],
         ]);
     }
 
+    public function uploadFile(Request $request){
+      
+    }
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array  $request
      * @return \App\User
      */
     protected function create(array $data)
@@ -79,6 +97,8 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'password' => Hash::make($data['password']),
             'dob' => $data['dob'],
+            'avatar'=>$this->filename,
+
         ]);
     }
 

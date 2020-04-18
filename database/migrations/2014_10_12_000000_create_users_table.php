@@ -21,10 +21,16 @@ class CreateUsersTable extends Migration
             $table->string('telephone')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('avatar')->default('default.jpg');
             $table->enum('gender',['male','female'])->nullable();
             $table->date('dob')->nullable();
+            $table->boolean('status')->default('1');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
+
+
         });
     }
 

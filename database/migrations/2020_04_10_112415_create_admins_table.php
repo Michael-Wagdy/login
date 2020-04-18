@@ -22,7 +22,8 @@ class CreateAdminsTable extends Migration
             $table->enum('admin_flag',['0','1']);
             $table->rememberToken();
             $table->timestamps();
-      
+            $table->softDeletes();
+
         });
     }
 

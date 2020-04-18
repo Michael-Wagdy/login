@@ -12,8 +12,11 @@
 */
 
 
-Route::get('profile','UserController@updatePasswordView');
-Route::post('profile','UserController@updatePassword')->name('updatePassword');
+Route::get('profile/passwordChange','UserController@updatePasswordView');
+Route::post('profile/passwordChange','UserController@updatePassword')->name('updatePassword');
+Route::get('profile/','UserController@show')->name('profile');
+Route::get('profile/edit','UserController@edit');
+Route::patch('profile/edit','UserController@update')->name('updateUserProfile');
 
 
 //Authentication routes
@@ -24,7 +27,7 @@ Route::post('logout','LoginController@logout')->name('logout');
 
 // Registration routes
 Route::post('register','RegisterController@register')->name('postRegister');
-Route::get('register','RegisterController@register');
+Route::get('register','RegisterController@showRegistrationForm');
 
 //password Reset Routes
 Route::get('passwords/reset','ForgotPasswordController@showLinkRequestForm');

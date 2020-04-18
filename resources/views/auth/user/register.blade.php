@@ -70,7 +70,7 @@
                             <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Profile picture') }}</label>
 
                             <div class="col-md-6">
-                                <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" >
+                                <input id="avatar" type="file" accept="image/*" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" >
 
                                 @error('avatar')
                                     <span class="invalid-feedback" role="alert">
@@ -99,9 +99,12 @@
 
                             <div class="col-md-6">
                                 <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" >
-                                <option> male </option>
-                                <option> female </option>
+                                <option value disabled {{ old('status', null) === null ? 'selected' : '' }}> Please select a status </option>
+                                @foreach(App\User::GENDER_SELECT as $key => $label)
+                                <option value={{ $key }}>{{ $label }}</option>
+                                @endforeach
                                 </select>
+                                
 
                                 @error('gender')
                                     <span class="invalid-feedback" role="alert">
@@ -111,6 +114,7 @@
                             </div>
                         </div>
 
+                        <div class="form-grou
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 

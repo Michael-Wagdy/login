@@ -11,7 +11,7 @@
 |
 */
 
-
+// Route::group(['middleware' => ['Auth']], function () {
 Route::get('profile/passwordChange','UserController@updatePasswordView');
 Route::post('profile/passwordChange','UserController@updatePassword')->name('updatePassword');
 Route::get('profile/','UserController@show')->name('profile');
@@ -19,12 +19,14 @@ Route::get('profile/edit','UserController@edit');
 Route::patch('profile/edit','UserController@update')->name('updateUserProfile');
 
 
-//Authentication routes
-Route::get('login','LoginController@showLoginForm')->name('login');
-Route::post('login','LoginController@login');
 Route::post('logout','LoginController@logout')->name('logout');
 
+// });
 
+//Authentication routes
+
+Route::get('login','LoginController@showLoginForm')->name('login');
+Route::post('login','LoginController@login');
 // Registration routes
 Route::post('register','RegisterController@register')->name('postRegister');
 Route::get('register','RegisterController@showRegistrationForm');

@@ -93,7 +93,7 @@
                             <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Profile picture') }}</label>
 
                             <div class="col-md-6">
-                                <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ $user->avatar }}" >
+                                <input id="avatar" type="file" accept="image/*" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ $user->avatar }}" >
 
                                 @error('avatar')
                                     <span class="invalid-feedback" role="alert">
@@ -108,11 +108,12 @@
 
                             <div class="col-md-6">
                                 <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ $user->gender }}" >
-                                <option> select your gender </option>
-                                <option> male </option>
-                                <option> female </option>
+                                <option value disabled {{ old('gender', null) === null ? 'selected' : '' }}>please Select a gender</option>
+                                @foreach(App\User::GENDER_SELECT as $key => $label)
+                                <option value={{ $key }} {{ old('gender', $user->status) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
                                 </select>
-
+                                
                                 @error('gender')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -126,12 +127,12 @@
 
                             <div class="col-md-6">
                                 <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ $user->status }}" >
-                                <option> select his status </option>
+                                <option value disabled {{ old('status', null) === null ? 'selected' : '' }}> Please select a status </option>
                                 @foreach(App\User::STATUS_SELECT as $key => $label)
                                 <option value={{ $key }} {{ old('status', $user->status) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
                                 @endforeach
                                 </select>
-                                </select>
+                                
 
                                 @error('status')
                                     <span class="invalid-feedback" role="alert">

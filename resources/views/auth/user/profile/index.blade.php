@@ -38,8 +38,7 @@
             <!-- /.card -->
 
 @endsection
-.profile-user-img {
-	
+
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
 @stop

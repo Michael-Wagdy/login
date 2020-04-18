@@ -48,7 +48,7 @@ class User extends Authenticatable
         false => 'Blocked',
         true => 'Active',
     ];
-    const Gender_SELECT = [
+    const GENDER_SELECT = [
         'male' => 'male',
         'female' => 'female',
     ];

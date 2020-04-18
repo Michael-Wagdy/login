@@ -5,8 +5,7 @@ namespace App\Http\Controllers\auth\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use Dotenv\Validator;
-use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 class UserManagementController extends Controller
 {
@@ -29,7 +28,7 @@ class UserManagementController extends Controller
      */
     protected function validator(array $data)
     {
-        
+
         return Validator::make($data, [
             'frist_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -52,7 +51,15 @@ class UserManagementController extends Controller
      */
     protected function store(array $data)
     {
-        
+        $this->validator($request->all())->validate();
+
+        if($request->hasFile('avatar')){
+            $avatar= $request->file('avatar');
+            $filename=time().'.'.$avatar->getClientOriginalExtension();
+           $avatar->storeAs('public/uploads/avatars',$filename);
+         
+        }
+
         return User::create([
             'frist_name' => $data['frist_name'],
             'last_name' => $data['last_name'],
@@ -61,10 +68,15 @@ class UserManagementController extends Controller
             'gender' => $data['gender'],
             'password' => Hash::make($data['password']),
             'dob' => $data['dob'],
+            'avatar'=>$filename,
+
         ]);
     }
     public function update(Request $request)  {
-        
+      
+      
+        $this->validator($request->all())->validate();
+
         if($request->hasFile('avatar')){
             $avatar= $request->file('avatar');
             $filename=time().'.'.$avatar->getClientOriginalExtension();

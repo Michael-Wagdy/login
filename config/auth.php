@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'webagency' => [
+            'driver' => 'session',
+            'provider' => 'agencies',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -77,6 +81,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
         ],
+        'agencies' =>[
+            'driver'=> 'eloquent',
+            'model' => App\Agency::class,
+        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

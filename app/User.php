@@ -17,10 +17,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['dob', 'created_at', 'updated_at','deleted_at']; 
-    public function getSomeDateAttribute($date)
-{
-    return $date->format('d-m-y');
-}
+//     public function getSomeDateAttribute($date)
+// {
+//     return $date->format('d-m-y');
+// }
        protected $fillable = [
         'frist_name','last_name', 'email', 'password','telephone','dob','gender','avatar','status'
     ];

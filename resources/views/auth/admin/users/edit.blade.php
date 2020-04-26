@@ -79,7 +79,7 @@
                             <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ $user->dob }}" >
+                                <input id="dob" type="text" class="form-control date @error('dob') is-invalid @enderror" name="dob" value="{{ $user->dob }}" >
 
                                 @error('dob')
                                     <span class="invalid-feedback" role="alert">
@@ -107,7 +107,7 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('gender') }}</label>
 
                             <div class="col-md-6">
-                                <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ $user->gender }}" >
+                                <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender">
                                 <option value disabled {{ old('gender', null) === null ? 'selected' : '' }}>please Select a gender</option>
                                 @foreach(App\User::GENDER_SELECT as $key => $label)
                                 <option value={{ $key }} {{ old('gender', $user->status) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>

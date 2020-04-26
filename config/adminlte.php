@@ -232,10 +232,22 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Agency Management',
+            'url'  => 'admin/agenciesManagement/',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'change_password',
             'url'  => 'admin/profile',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        
+        [
+            'text' => 'Offers management',
+            'url'  => 'admin/offer',
+            'icon' => 'fas fa-fw fa-book',
+        ],
+        
         [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',

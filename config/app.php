@@ -227,5 +227,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    [
+        // ...
+        'datetime_format' => 'Y-m-d h:i',
+        'datetime_format_js' => 'yyyy-mm-dd hh:ii',
+        // ...
+    ]
 ];

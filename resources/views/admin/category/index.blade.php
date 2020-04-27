@@ -12,6 +12,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Categories Table</h3>
+                <a  href="{{route('admin.category.create')}}"class="btn btn-xs btn-info mb-2" >create</a>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">

@@ -22,7 +22,7 @@ class CreateOffersTable extends Migration
             $table->string('user_price');
             $table->integer('no_rooms');
             $table->boolean('status');
-            $table->foreign('agency_id', 'agency_fk_718231')->references('id')->on('agancies');
+            $table->foreign('agency_id', 'agency_fk_718231')->references('id')->on('agencies');
             $table->unsignedBigInteger('agency_id');
             $table->timestamps();
             $table->softDeletes();

@@ -19,11 +19,11 @@ class UserController extends Controller
     {
         # code...
         $user = Auth::user();
-        return view('auth.user.profile.index',compact('user'));
+        return view('user.profile.index',compact('user'));
     }
     public function edit(){
         $user = Auth::user();
-        return view('auth.user.profile.edit',compact('user'));
+        return view('user.profile.edit',compact('user'));
     }
        /**
      * Get a validator for an incoming registration request.
@@ -69,7 +69,7 @@ class UserController extends Controller
     }
 
     public function updatePasswordView(){
-        return view('auth.user.profile.passwordChange');
+        return view('user.profile.passwordChange');
     }
 
     public function updatePassword(Request $request ){

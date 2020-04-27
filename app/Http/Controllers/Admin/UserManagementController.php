@@ -13,12 +13,12 @@ class UserManagementController extends Controller
 
     public function index(){
         $users = User::all();
-        return view('auth.admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
 
     }
 
     public function create(){
-        return view('auth.admin.users.create');
+        return view('admin.users.create');
     }
  /**
      * Get a validator for an incoming registration request.
@@ -102,7 +102,7 @@ class UserManagementController extends Controller
 
     public function edit($id){
         $user= User::find($id);
-        return view('auth.admin.users.edit',compact('user'));
+        return view('admin.users.edit',compact('user'));
     }
     public function delete($id){
         $user= User::find($id);

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\auth\admin;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 use Gate;
-use App\Admin as AppAdmin;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -59,7 +57,7 @@ class AdminController extends Controller
     public function updatePasswordView(){
         abort_if(Gate::denies(Auth::user()), redirect('home'));
 
-        return view('auth.admin.profile');
+        return view('admin.profile');
     }
 
     public function updatePassword(Request $request ){
@@ -102,7 +100,7 @@ class AdminController extends Controller
         // return "there are".$noOfAdmins . "  registered";
 
 
-        return view('auth.admin.dashboard');
+        return view('admin.dashboard');
     }
 
 

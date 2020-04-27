@@ -47,7 +47,7 @@ class OfferManagementController extends Controller
     {
         //
         $offers = Offer::with('agency:id,name')->get();
-        return view('auth.admin.offer.index',compact('offers'));
+        return view('admin.offer.index',compact('offers'));
     }
 
     /**
@@ -58,7 +58,7 @@ class OfferManagementController extends Controller
     public function create()
     {
         //
-        return view('auth.admin.offer.create');
+        return view('admin.offer.create');
     }
 
     /**
@@ -140,7 +140,7 @@ class OfferManagementController extends Controller
 
         $offer = Offer::find($id);
         
-        return view('auth.admin.offer.show',compact('offer'));
+        return view('admin.offer.show',compact('offer'));
     }
 
     /**
@@ -154,7 +154,7 @@ class OfferManagementController extends Controller
         //
            
         $offer = Offer::find($id);
-        return view('auth.admin.offer.edit',compact('offer'));
+        return view('admin.offer.edit',compact('offer'));
     }
 
     /**

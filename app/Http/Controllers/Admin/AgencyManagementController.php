@@ -14,7 +14,7 @@ class AgencyManagementController extends Controller
         
         $agenies = Agency::all();
         
-        return view('auth.admin.agenciesManagement.index',compact('agenies'));
+        return view('admin.agenciesManagement.index',compact('agenies'));
 
     }
 
@@ -42,7 +42,7 @@ class AgencyManagementController extends Controller
 
 
     public function create(){
-        return  view('auth.admin.agenciesManagement.create');
+        return  view('admin.agenciesManagement.create');
         }
 
     public function store(Request $request){
@@ -79,7 +79,7 @@ class AgencyManagementController extends Controller
         
         $agency = Agency::find($id);
         
-        return view('auth.admin.agenciesManagement.edit',compact('agency'));
+        return view('admin.agenciesManagement.edit',compact('agency'));
 
     }
     

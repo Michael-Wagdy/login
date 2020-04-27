@@ -13,7 +13,7 @@ class CategoryManagementController extends Controller
         
         $categories = Category::all();
         
-        return view('auth.admin.category.index',compact('categories'));
+        return view('admin.category.index',compact('categories'));
 
     }
 
@@ -35,7 +35,7 @@ class CategoryManagementController extends Controller
 
 
     public function create(){
-        return  view('auth.admin.category.create');
+        return  view('admin.category.create');
         }
 
     public function store(Request $request){
@@ -56,7 +56,7 @@ class CategoryManagementController extends Controller
         
         $category = Category::find($id);
         
-        return view('auth.admin.category.edit',compact('category'));
+        return view('admin.category.edit',compact('category'));
 
     }
     

@@ -131,7 +131,7 @@
                             <div class="col-md-8">
                                 <select id="agency" class="form-control @error('agency') is-invalid @enderror" name="agency" value="{{ old('agency') }}" >
                                 <option value disabled {{ old('agency', null) === null ? 'selected' : '' }}> Please select a agency </option>
-                                @foreach(App\Agancy::all() as $agency)
+                                @foreach(App\Agency::all() as $agency)
                                 <option value={{ $agency->id }} >{{ $agency->name }}</option>
                                 @endforeach
                                 </select>

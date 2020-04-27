@@ -11,25 +11,27 @@
 |
 */
 
-use Illuminate\Routing\RouteGroup;
-
-Route::get('dashboard', 'AdminController@countAdmins')
-->middleware('Authadmin:webadmin');
+Route::group(['namespace'=>"Auth\Admin"], function () {
 Route::get('login','AdminController@showLoginForm');
 Route::post('login','AdminController@login')->name('adminLogin');
 Route::get('profile','AdminController@updatePasswordView');
 Route::post('profile','AdminController@updatePassword')->name('updateAdminPassword');
 Route::post('logout','AdminController@logout')->name('adminlogout');
 
+//dashboard 
 
+Route::get('dashboard', 'AdminController@countAdmins')->middleware('Authadmin:webadmin');
+
+});
 // user management 
-Route::group(['middleware' => ['Authadmin:webadmin']], function () {
+Route::group(['middleware' => 'Authadmin:webadmin',"namespace"=>"Admin"], function () {
 Route::get('users','UserManagementController@index');
 Route::get('users/create','UserManagementController@create');
 Route::patch('users/edit/{id}','UserManagementController@update')->name('admin.user.update');
 Route::post('users/create','UserManagementController@store')->name('registerUser');
 Route::get('users/edit/{id}','UserManagementController@edit')->name('admin.user.edit');
 Route::delete('users/delete/{id}','UserManagementController@delete')->name('admin.user.delete');
+
 
 
 //agencies management 
@@ -57,4 +59,5 @@ Route::patch('category/edit/{id}','CategoryManagementController@update')->name('
 Route::post('category/create','CategoryManagementController@store')->name('admin.category.create');
 Route::get('category/edit/{id}','CategoryManagementController@edit')->name('admin.category.edit');
 Route::delete('category/delete/{id}','CategoryManagementController@delete')->name('admin.category.delete');
+
 });

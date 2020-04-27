@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\auth\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Offer;
-use App\OfferCategory;
-use App\OfferDetail;
-use App\Photo;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,7 +46,7 @@ class OfferManagementController extends Controller
     public function index()
     {
         //
-        $offers = Offer::all();
+        $offers = Offer::with('agency:id,name')->get();
         return view('auth.admin.offer.index',compact('offers'));
     }
 
@@ -77,7 +73,7 @@ class OfferManagementController extends Controller
         
         $this->validator($request->all())->validate();
         
-         Offer::create([
+        $offer=   Offer::create([
             'name' => $request['name'],
             'start_date' => $request['start_date'],
             'end_date' => $request['end_date'],
@@ -90,9 +86,7 @@ class OfferManagementController extends Controller
 
         ]);
 
-            // get last offer inserted id
-        $offer_id = Offer::latest()->first()->id;
-
+      
 
         // check if there's photos uploaded and saving it 
     if($request->hasFile('photos')){
@@ -100,8 +94,7 @@ class OfferManagementController extends Controller
            $filename=time().'.'.$image->getClientOriginalExtension();
            $image->storeAs('public/uploads/photo',$filename);  
     // create a new photo attached to offer
-           Photo::create([
-        'offer_id'=>$offer_id,
+    $offer->photo()->create([
         'photo'=>$filename ]);
     }
     }
@@ -113,8 +106,7 @@ class OfferManagementController extends Controller
       $i=0;
       $num_rows= count($request['to']);
     while($num_rows > $i ){
-      OfferDetail::create([
-       'offer_id'=>$offer_id,
+        $offer->details()->create([
         'Departial_time'=>$request['Departial_time'][$i],
         'arrival_time'=>$request['arrival_time'][$i],
         'to'=>$request['to'][$i],
@@ -127,12 +119,8 @@ class OfferManagementController extends Controller
             //end of offer details 
 
 
-            foreach($request['category'] as $category){
-                OfferCategory::create([
-                    'offer_id'=>$offer_id,
-                    'category_id'=>$category]);
+            $offer->categories()->sync($request['category']);
 
-            }
 
         return back()->with('sucess','you have created an agency accounts');
 
@@ -151,7 +139,7 @@ class OfferManagementController extends Controller
         //
 
         $offer = Offer::find($id);
-
+        
         return view('auth.admin.offer.show',compact('offer'));
     }
 

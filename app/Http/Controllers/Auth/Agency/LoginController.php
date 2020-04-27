@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\agency;
+namespace App\Http\Controllers\Auth\Agency;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;

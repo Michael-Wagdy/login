@@ -111,7 +111,7 @@
                             <label for="status" class="col-md-4 col-form-label ">{{ __('status') }}</label>
 
                             <div class="col-md-8">
-                                <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ $offer->status }}" >
+                                <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" >
                                 <option value disabled {{ $offer->status === null ? 'selected' : '' }}> Please select a status </option>
                                 @foreach(App\User::STATUS_SELECT as $key => $label)
                                 <option value={{ $key }} >{{ $label }}</option>

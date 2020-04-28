@@ -86,7 +86,7 @@
 
                             <div class="col-md-8">
                                 <select id="country" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" >
-                                <option value disabled {{ $agency->country === null ? 'selected' : '' }}> Please select a status </option>
+                                <option value disabled {{ $agency->country === null ? 'selected' : '' }}> Please select a country </option>
                                 @foreach(App\Agency::COUNTRY_SELECT as $label)
                                 <option >{{ $label }}</option>
                                 @endforeach

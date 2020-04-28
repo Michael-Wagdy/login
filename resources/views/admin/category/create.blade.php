@@ -7,12 +7,16 @@
 @stop
 
 @section('content')
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('create category') }}</div>
-
+                @if (!empty($success))
+                    <h1>{{$success}}</h1>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.category.create') }}">
                         @csrf

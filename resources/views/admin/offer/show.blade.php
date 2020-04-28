@@ -11,7 +11,6 @@
           <div class="col-12">
             <div class="card">
              
-
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fas fa-text-width"></i>

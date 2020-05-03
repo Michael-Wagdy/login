@@ -20,11 +20,14 @@ Route::patch('profile/edit','UserController@update')->name('updateUserProfile');
 Route::get('contactus','ContactUSController@create');
 Route::post('contactus','ContactUSController@store')->name('user.contactus');
 
+//home
+
+Route::get('home', 'HomeController@index')->name('user.home');
 });
 
 //Authentication routes
 Route::group(['namespace' => 'Auth\User'], function () {
-Route::post('logout','LoginController@logout')->name('logout')->middleware('Auth');
+Route::post('logout','LoginController@logout')->name('logout');
 
 Route::get('login','LoginController@showLoginForm')->name('login');
 Route::post('login','LoginController@login');
@@ -36,4 +39,7 @@ Route::get('register','RegisterController@showRegistrationForm');
 Route::get('passwords/reset','ForgotPasswordController@showLinkRequestForm');
 Route::post('passwords/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('passwords/reset/{token}','ResetPasswordController@showResetForm');
-Route::post('Passwords/rest','ResetPasswordController@reset')->name('password.reset');});
+Route::post('Passwords/rest','ResetPasswordController@reset')->name('password.reset');
+
+
+});

@@ -43,19 +43,51 @@ class ContactUSController extends Controller
     public function store(StoreContactUsRequest $request)
     {
         //
-        $contactUS = new ContactUS();
-        $contactUS->frist_name = $request->frist_name;
-        $contactUS->last_name = $request->last_name;
-        $contactUS->email = $request->email;
-        $contactUS->subject = $request->subject;
-        $contactUS->message = $request->message;
-        $contactUS->user_id = Auth::user()->id;
-        $contactUS->status = 1;
-        $contactUS->save();
+            $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = [
+            'secret' => '6LfBx_EUAAAAAC9oFCHglBQjv-sZfBxZJUtagCPT',
+            'response' => $request['g-recaptcha']
+        ];
+    $options = [
+            'http' => [
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data)
+            ]
+        ];
+    $context = stream_context_create($options);
+            $result = file_get_contents($url, false, $context);
+            $resultJson = json_decode($result);
+    if ($resultJson->success = false) {
+            return back()->withErrors(['captcha' => 'ReCaptcha not true']);
+            }
+    if ($resultJson->score >= 0.3) {
+            //Validation was successful, add your form submission logic here
+
+            $contactUS = new ContactUS();
+            $contactUS->frist_name = $request->frist_name;
+            $contactUS->last_name = $request->last_name;
+            $contactUS->email = $request->email;
+            $contactUS->subject = $request->subject;
+            $contactUS->message = $request->message;
+            $contactUS->user_id = Auth::user()->id;
+            $contactUS->status = 1;
+            $contactUS->save();
+    
+    
+    
+            return back()->with(['success','your message has been sent, we are going to contact you soon']);
+    
 
 
 
-        return back()->with(['success','your message has been sent, we are going to contact you soon']);
+
+
+
+          
+    } else {
+            return back()->withErrors(['captcha' => 'ReCaptcha less than 0.3']);
+    }
     }
 
     /**

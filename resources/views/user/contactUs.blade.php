@@ -6,6 +6,24 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Contact Us') }}</div>
+                @if ($errors->any())
+
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+</div>
+@endif
+
+@if(session()->has('success'))
+<div class="alert alert-success">
+{{ session()->get('success') }}
+</div>
+@endif
+
+
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('user.contactus') }}">
@@ -85,8 +103,7 @@
                             </div>
                         </div>
 
-
-
+                        <input type="hidden" name="g-recaptcha" id="g-recaptcha">
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -100,4 +117,17 @@
         </div>
     </div>
 </div>
+
+@endsection
+@section('js')
+<script src="https://www.google.com/recaptcha/api.js?render=6LfBx_EUAAAAALR_QSKNRkIkDulQpgiOasotXQso"></script>
+<script>
+         grecaptcha.ready(function() {
+             grecaptcha.execute('6LfBx_EUAAAAALR_QSKNRkIkDulQpgiOasotXQso', {action: 'contactus'}).then(function(token) {
+                if (token) {
+                  document.getElementById("g-recaptcha").value = token;
+                }
+             });
+         });
+</script>
 @endsection

@@ -67,8 +67,6 @@ class OfferManagementController extends Controller
     {
         //
 
-        // $offer = Offer::with(['agency:id,name','photo','details','categories',function($query){
-        //     $query->where('id','like',$id);}])->get();
         $offer = Offer::findOrFail($id);
         return view('admin.offer.show',compact('offer'));
     }

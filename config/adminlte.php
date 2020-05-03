@@ -179,7 +179,7 @@ return [
 
     'password_email_url' => 'password/email',
 
-    'profile_url' => true,//was false
+    'profile_url' => false,//was false
 
     /*
     |--------------------------------------------------------------------------
@@ -219,8 +219,8 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pagesssss',
-            'url'         => 'admin/pages',
+            'text'        => 'contact us',
+            'url'         => 'admin/message',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
@@ -247,59 +247,13 @@ return [
             'url'  => 'admin/offer',
             'icon' => 'fas fa-fw fa-book',
         ],
+        ['header' => 'contact us'],
+        [
+            'text' => 'messages',
+            'url'  => 'admin/message',
+            'icon' => 'fas fa-fw fa-envelope',
+        ],
         
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'aqua',
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

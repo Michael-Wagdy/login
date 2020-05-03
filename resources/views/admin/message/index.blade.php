@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+
 <div class="row">
           <div class="col-12">
             <div class="card">
@@ -31,7 +32,8 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>subject</th>
+                      <th>subject</t h>
+                      <th>read</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -43,7 +45,12 @@
                       <td>{{$message->email}}</td>
                       <td>{{$message->subject}}</td>
                       <td>
-                                        <a  href="{{route('admin.message.show',$message->id)}}"class="btn btn-xs btn-info" >show</a>
+                      <button type="button" name="status" class="btn btn-default"  data-id="{{ $message->id }}">
+  <span class=" glyphicon glyphicon-envelope " style="color: {{ $message->status === 1 ? 'blue;' : 'black;' }}" aria-hidden="true"></span>
+</button>
+</td> 
+                      <td>
+                                      <a  href="{{route('admin.message.show',$message->id)}}"class="btn btn-xs btn-info" >show</a>
 
                       </td>
                     </tr>
@@ -61,7 +68,31 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 @stop
 
 @section('js')
+<!-- Latest compiled and minified JavaScript -->
+<script>
+$(document).ready(function(){
+    $("button").click(function () {
+      
+        let status = $(this).find("span").css('color') == "rgb(0, 0, 0)" ? 1 : 0;
+     status ?   $(this).find("span").css('color',"blue") :$(this).find("span").css('color',"black"); 
+                let contactUs = $(this).data('id');
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('admin.message.updateRead') }}',
+            data: {'status': status, 'contactUs': contactUs},
+            success: function (data) {
+                console.log(data.message);
+            }
+        });
+    });
+});
+</script>
 @stop

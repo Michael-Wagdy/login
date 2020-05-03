@@ -73,9 +73,15 @@ class ContactUSController extends Controller
      * @param  \App\ContactUS  $contactUS
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactUS $contactUS)
+    public function updateRead(Request $request, ContactUS $contactUS)
     {
         //
+        
+        $contact = ContactUS::findOrFail($request->contactUs);
+        $contact->status = $request->status;
+        $contact->save();
+
+        return response()->json(['message' => 'message status updated successfully.']);
     }
 
     /**

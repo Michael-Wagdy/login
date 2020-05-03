@@ -203,8 +203,27 @@
             <div class="container">
             @endif
 
-            <div class="content-header">
-                <div class="{{config('adminlte.classes_content_header', 'container-fluid')}}">
+                    <div class="content-header">
+                        <div class="{{config('adminlte.classes_content_header', 'container-fluid')}}">
+                        @if ($errors->any())
+
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+        </div>
+        @endif
+
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+        {{ session()->get('success') }}
+        </div>
+        @endif
+       
+
+
                     @yield('content_header')
                 </div>
             </div>

@@ -33,6 +33,9 @@ Route::get('users/edit/{id}','UserManagementController@edit')->name('admin.user.
 Route::delete('users/delete/{id}','UserManagementController@delete')->name('admin.user.delete');
 
 
+//contactUs
+Route::get('message/','ContactUSController@index');
+Route::get('message/show/{contactUS}','ContactUSController@show')->name('admin.message.show');
 
 //agencies management 
 Route::get('agenciesManagement','AgencyManagementController@index');

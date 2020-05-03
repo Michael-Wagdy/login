@@ -17,7 +17,7 @@ class CreatePhotosTable extends Migration
             $table->bigIncrements('id');
             $table->string('photo');
             $table->unsignedBigInteger('offer_id');
-            $table->foreign('offer_id', 'offer_fk_718231')->references('id')->on('offers');
+            $table->foreign('offer_id', 'offer_fk_718231')->references('id')->on('offers')->onDelete('cascade');
             $table->timestamps();
             });
     }

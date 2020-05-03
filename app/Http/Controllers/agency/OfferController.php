@@ -113,7 +113,7 @@ class OfferController extends Controller
         //
         $offer = Offer::find($id);
         $offer->delete();
-        return back()->with('sucess','you have dleted an offer');
+        return back()->with(['success' =>'you have deleted an offer']);
 
     }
 }

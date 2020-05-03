@@ -3,7 +3,6 @@
 @section('title', 'Create offer ')
 
 @section('content_header')
-    <h1>Create offer</h1>
 @stop
 
 @section('content')

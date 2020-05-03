@@ -11,12 +11,15 @@
 |
 */
 
-Route::group(['middleware' => 'Auth','namespace'=>'User'], function () {
+Route::group(['namespace'=>'User'], function () {
 Route::get('profile/passwordChange','UserController@updatePasswordView');
 Route::post('profile/passwordChange','UserController@updatePassword')->name('updatePassword');
 Route::get('profile/','UserController@show')->name('profile');
 Route::get('profile/edit','UserController@edit');
 Route::patch('profile/edit','UserController@update')->name('updateUserProfile');
+Route::get('contactus','ContactUSController@create');
+Route::post('contactus','ContactUSController@store')->name('user.contactus');
+
 });
 
 //Authentication routes

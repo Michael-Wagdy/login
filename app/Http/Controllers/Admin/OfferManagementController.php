@@ -52,7 +52,7 @@ class OfferManagementController extends Controller
         
         $this->offerServices->create($request);
 
-        return back()->with(['success' => 'Congratulations you have updated an offer!']);
+        return back()->with(['success' => 'Congratulations you have created an offer!']);
     }
         
     
@@ -113,5 +113,9 @@ class OfferManagementController extends Controller
     public function destroy($id)
     {
         //
+        $offer = Offer::find($id);
+        $offer->delete();
+        return back()->with(['success' =>'you have deleted an offer']);
+
     }
 }

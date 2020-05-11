@@ -19,7 +19,7 @@ class Agency extends Authenticatable
      * @var array
      */
     protected $dates = ['created_at', 'updated_at','deleted_at']; 
-
+    protected $guard = 'webagency';
     protected $fillable = [
         'name','email', 'password','phone','photo','address','country'
     ];

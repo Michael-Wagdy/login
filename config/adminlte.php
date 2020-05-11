@@ -218,14 +218,7 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        [
-            'text'        => 'pagesssss',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
+      
         [
             'text' => 'User Management',
             'url'  => 'admin/users/',
@@ -247,43 +240,20 @@ return [
             'url'  => 'admin/offer',
             'icon' => 'fas fa-fw fa-book',
         ],
-        
+      
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'categoryies management',
+            'url'  => 'admin/category',
+            'icon' => 'fas fa-fw fa-list',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'create',
+                    'url'  => 'admin/category/create',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
+                    'text' => 'index',
+                    'url'  => 'admin/category',
+                ]
             ],
         ],
         ['header' => 'labels'],

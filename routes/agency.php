@@ -10,31 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::group(['middleware' => ['Auth']], function () {
-Route::get('profile/passwordChange','UserController@updatePasswordView');
-Route::post('profile/passwordChange','UserController@updatePassword')->name('updatePassword');
-Route::get('profile/','UserController@show')->name('profile');
-Route::get('profile/edit','UserController@edit');
-Route::patch('profile/edit','UserController@update')->name('updateUserProfile');
-
+Route::group(['namespace'=> 'Auth\Agency'], function () {
 
 Route::post('logout','LoginController@logout')->name('agency.logout');
 
-// // });
 
 //Authentication routes
 
 Route::get('login','LoginController@showLoginForm')->name('agency.login');
 Route::post('login','LoginController@login');
+});
 
-// password Reset Routes
-Route::get('passwords/reset','ForgotPasswordController@showLinkRequestForm');
-Route::post('passwords/email','ForgotPasswordController@sendResetLinkEmail')->name('agency.password.email');
-Route::get('passwords/reset/{token}','ResetPasswordController@showResetForm');
-Route::post('Passwords/rest','ResetPasswordController@reset')->name('agency.password.reset');
+// // password Reset Routes
+// Route::get('passwords/reset','ForgotPasswordController@showLinkRequestForm');
+// Route::post('passwords/email','ForgotPasswordController@sendResetLinkEmail')->name('agency.password.email');
+// Route::get('passwords/reset/{token}','ResetPasswordController@showResetForm');
+// Route::post('Passwords/rest','ResetPasswordController@reset')->name('agency.password.reset');
 
-Route::group(['middleware' => ['Authagency:webagency']], function () {
+Route::group(['middleware' => 'Authagency:webagency','namespace'=> 'Agency'], function () {
 //offers management 
 Route::get('offer','OfferController@index');
 Route::get('offer/show/{id}','OfferController@show')->name('agency.offer.show');

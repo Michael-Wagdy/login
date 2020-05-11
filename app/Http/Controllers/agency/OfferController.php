@@ -3,50 +3,24 @@
 namespace App\Http\Controllers\agency;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateOfferRequest;
+use App\Http\Requests\UpdateOfferRequest;
 use App\Offer;
-
 use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Services\OfferServices;
+
 class OfferController extends Controller
-{
-    
-      /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-      /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+{   
+    public $offerServices;
+    public function __construct()
     {
-
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'start_date' => ['required','date'],
-            'end_date' => ['required', 'date'],
-            'agency_price' => ['required', 'string', 'max:25'],
-            'user_price' => ['required', 'string', 'max:25'],
-            'no_rooms' => ['required', 'integer'],
-            'status'=> 'boolean',
-            'photos.*'=> 'image|max:1999',
-            'Departial_time.*'=>['required', 'date'],
-            'arrival_time.*'=>['required', 'date'],
-            'to.*' => ['required', 'string', 'max:100'],
-            'from.*' => ['required', 'string', 'max:100'],
-            'transportation_mode.*'=>'in:bus,train',
-            'category.*' => ['required', 'integer'],
-            'no_trip.*' => ['required', 'integer'],
-
-        ]
-    );
+        $this->offerServices = new OfferServices;
     }
+    
+
+
+    
     public function index()
     {
         //to fatech data of offers related to logged in user
@@ -71,56 +45,10 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOfferRequest $request)
     {
         //
-       $this->validator($request->all())->validate();
-       
-       $offer= Auth::guard('webagency')->user()->offers()->create([
-            'name' => $request['name'],
-            'start_date' => $request['start_date'],
-            'end_date' => $request['end_date'],
-            'agency_price' => $request['agency_price'],
-            'user_price' => $request['user_price'],
-            'no_rooms' => $request['no_rooms'],
-            'status' => $request['status'],
-                   ]);
-           
-            // get last offer inserted id
-        $offer_id = Offer::latest()->first()->id;
-
-
-        // check if there's photos uploaded and saving it 
-    if($request->hasFile('photos')){
-        foreach($request->file('photos') as $image){
-           $filename=time().'.'.$image->getClientOriginalExtension();
-           $image->storeAs('public/uploads/photo',$filename);  
-    // create a new photo attached to offer
-          $offer->photo()->create([
-              'photo'=>$filename ]);
-    }
-    }
-    //end of upload photo code
-
-    //add offer details 
-      $i=0;
-      $num_rows= count($request['to']);
-    while($num_rows > $i ){
-      $offer->details()->create([
-        'Departial_time'=>$request['Departial_time'][$i],
-        'arrival_time'=>$request['arrival_time'][$i],
-        'to'=>$request['to'][$i],
-        'from'=>$request['from'][$i],
-        'no_trip'=>$request['no_trip'][$i],
-        'transportation_mode'=>$request['transportation_mode'][$i]]);
-        $i++;
-            }
-            //end of offer details 
-
-
-                $offer->categories()->attach($request['category']);
-
-            
+        $this->offerServices->create($request);
 
         return back()->with('sucess','you have created an offer');
 
@@ -164,55 +92,13 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOfferRequest $request, $id)
     {
         //
-        $this->validator($request->all())->validate();
-        $offer = Offer::find($id);
-        $offer->update([
-           'name' => $request['name'],
-           'start_date' => $request['start_date'],
-           'end_date' => $request['end_date'],
-           'agency_price' => $request['agency_price'],
-           'user_price' => $request['user_price'],
-           'no_rooms' => $request['no_rooms'],
-           'status' => $request['status'],
+           
+        $this->offerServices->update($request,$id);
 
-       ]);       
-   //add offer details 
-     
-   $offer->details()->delete();
-     $num_rows= count($request['to']);
-     for($i=0;$num_rows > $i ;$i++){
-          $offer->details()->create([
-       'Departial_time'=>$request['Departial_time'][$i],
-       'arrival_time'=>$request['arrival_time'][$i],
-       'to'=>$request['to'][$i],
-       'from'=>$request['from'][$i],
-       'no_trip'=>$request['no_trip'][$i],
-       'transportation_mode'=>$request['transportation_mode'][$i],]);
-           }
-        //    end of offer details 
-
-
-       // check if there's photos uploaded and saving it 
-   if($request->hasFile('photos')){
-       foreach($request->file('photos') as $image){
-          $filename=time().'.'.$image->getClientOriginalExtension();
-          $image->storeAs('public/uploads/photo',$filename);  
-   // create a new photo attached to offer
-         $offer->photo()->update(['photo'=>$filename]);
-   }
-   }
-   //end of upload photo code
-
-
-
-
-
-               $offer->categories()->sync($request['category']);
-
-           return back()->with('sucess','you have updated an offer');
+        return back()->with(['success' => 'Congratulations you have added an offer!']);
 
     }
 
@@ -227,7 +113,7 @@ class OfferController extends Controller
         //
         $offer = Offer::find($id);
         $offer->delete();
-        return back()->with('sucess','you have dleted an offer');
+        return back()->with(['success' =>'you have deleted an offer']);
 
     }
 }

@@ -3,34 +3,24 @@
 @section('title', 'edit offer ')
 
 @section('content_header')
-    <h1>edit offer</h1>
+
 @stop
 
 @section('content')
-<!-- <link rel="stylesheet" href="{{ asset('vendor/almasaeed2010/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-<script src="{{ asset('vendor/almasaeed2010/adminlte/plugins/select2/js/select2.js') }}"></script> -->
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('update offer') }}</div>
-
+                     
+            
                 <div class="card-body">
                     <form method="POST" action="{{ route('agency.offer.update',$offer->id) }}"  enctype="multipart/form-data">
                         @csrf
                         {{method_field('patch')}}
+                      
                         <div class="form-group row">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                             <label for="name" class="col-md-4 col-form-label ">{{ __('Name') }}</label>
 
                             <div class="col-md-8">
@@ -122,7 +112,7 @@
                             <label for="status" class="col-md-4 col-form-label ">{{ __('status') }}</label>
 
                             <div class="col-md-8">
-                                <select  class="form-control @error('status') is-invalid @enderror" name="status" value="{{ $offer->status }}" >
+                                <select  class="form-control @error('status') is-invalid @enderror" name="status">
                                 <option value disabled {{ $offer->status === null ? 'selected' : '' }}> Please select a status </option>
                                 @foreach(App\User::STATUS_SELECT as $key => $label)
                                 <option value={{ $key }} >{{ $label }}</option>

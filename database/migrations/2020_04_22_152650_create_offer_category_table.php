@@ -17,7 +17,7 @@ class CreateOfferCategoryTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('offer_id');
 
-            $table->foreign('offer_id', 'offer_id_fk_702184')->references('id')->on('offers');
+            $table->foreign('offer_id', 'offer_id_fk_702184')->references('id')->on('offers')->onDelete('cascade');
 
             $table->unsignedBigInteger('category_id');
 

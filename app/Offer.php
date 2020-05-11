@@ -18,11 +18,12 @@ class Offer extends Model
         'agency_id'
     ];
     
-    public function categories(){
-      return  $this->belongsToMany(Category::class,'offer_category','offer_id','category_id');
-    }
+    
 
-
+    const Transporation_SELECT = [
+        'bus' => 'bus',
+        'train' => 'train',
+    ];
     
     // public function getStartDateAttribute($input)
     // {
@@ -56,10 +57,9 @@ class Offer extends Model
     public function photo(){
         return $this->hasMany(Photo::class);
     }
-
+    public function categories(){
+        return  $this->belongsToMany(Category::class,'offer_category','offer_id','category_id');
+      }
+  
     
-    const Transporation_SELECT = [
-        'bus' => 'bus',
-        'train' => 'train',
-    ];
 }

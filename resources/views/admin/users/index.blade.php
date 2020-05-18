@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('admin.layouts.master')
 
 @section('title', 'User Managment')
 
@@ -11,8 +11,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Users Table</h3>
-
+  
+              <h3 class="card-title">Users Table  </h3>
+                <a  href="{{route('admin.user.create')}}"class="btn btn-xs btn-info mb-2" >create</a>
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -38,18 +39,16 @@
                   </thead>
                   <tbody>
                     @foreach($users as $user)
-                    <tr>
+                    <tr id= '{{$user->id}}'>
                       <td>{{$user->id}}</td>
                       <td>{{$user->frist_name . ' ' .$user->last_name}}</td>
                       <td>{{$user->dob}}</td>
                       <td>{{$user->email}}</td>
                       <td>{{$user->telephone}}</td>
                       <td>
-                      <form action="{{ route('admin.user.delete', $user->id) }}" method="POST" onsubmit="return confirm('areYouSure');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="delete"></form>
+                      <button  class="btn btn-xs btn-danger" data-token="{{ csrf_token() }}" data-id="{{$user->id}}">delete</button>
                                         <a  href="{{route('admin.user.edit',$user->id)}}"class="btn btn-xs btn-info" >Info</a>
+
 
                       </td>
                     </tr>
@@ -64,11 +63,36 @@
         </div>
         <!-- /.row -->
         @stop
+        @section('js')
+        <script>
+$(document).ready(function(){
+    $("button").click(function () {
+      
+let id = $(this).data('id');
+let  token = $(this).data("token");
+console.log(id);
+$.ajax(
+{
+    url: "delete/"+id,
+    type: 'DELETE', // Just delete Latter Capital Is Working Fine
+    dataType: "JSON",
+    data: {
+        "id": id ,// method and token not needed in data
+        "_token": token,
+    },
+    success: function (response)
+    {
+        console.log(response); // see the reponse sent
+        $("#"+id).remove();
 
+    }
+   
+});
+});
+});
+
+</script>
+@stop
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
 @stop

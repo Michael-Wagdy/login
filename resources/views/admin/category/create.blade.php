@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('admin.layouts.master')
 
 @section('title', 'Create Category')
 

@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('admin.layouts.master')
 
 @section('title', 'Offers Managment')
 
@@ -40,7 +40,7 @@
                   </thead>
                   <tbody>
                     @foreach($offers as $offer)
-                    <tr>
+                    <tr id="{{$offer->id}}">
                       <td>{{$offer->id}}</td>
                       <td>{{$offer->name}}</td>
                       <td>{{date_format($offer->start_date,'l d F Y, h:m A')}}</td>
@@ -48,10 +48,8 @@
                       <td>{{$offer->no_rooms}}</td>
                       <td>{{$offer->agency->name}}</td>
                       <td>
-                      <form action="{{ route('admin.offer.delete', $offer->id) }}" method="POST" onsubmit="return confirm('areYouSure');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="delete"></form>
+                      <button type="button" name="delete" class="btn btn-xs btn-danger" data-token="{{ csrf_token() }}"  data-id="{{ $offer->id }}">delete</button>
+
                                         <a  href="{{route('admin.offer.edit',$offer->id)}}"class="btn btn-xs btn-info" >Edit</a>
                                         <a  href="{{route('admin.offer.show',$offer->id)}}"class="btn btn-xs btn-info" >show</a>
 
@@ -72,6 +70,33 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
-
 @section('js')
+<script>
+$(document).ready(function(){
+    $("button").click(function () {
+      
+let id = $(this).data('id');
+let  token = $(this).data("token");
+console.log(id);
+$.ajax(
+{
+    url: "offer/delete/"+id,
+    type: 'DELETE', // Just delete Latter Capital Is Working Fine
+    dataType: "JSON",
+    data: {
+        "id": id ,// method and token not needed in data
+        "_token": token,
+    },
+    success: function (response)
+    {
+        console.log(response); // see the reponse sent
+        $("#"+id).remove();
+
+    }
+   
+});
+});
+});
+
+</script>
 @stop

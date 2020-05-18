@@ -75,4 +75,9 @@ class CategoryManagementController extends Controller
         return back()->with('sucess','you have updated an agency accounts');
 
     }
+    public function destory($id){
+        $categorry= Category::findOrFail($id)->delete();
+        return response()->json(['message'=> 'you have deleted a category']);
+    }
+
 }

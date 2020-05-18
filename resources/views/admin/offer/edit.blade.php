@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('admin.layouts.master')
 
 @section('title', 'edit offer ')
 
@@ -7,8 +7,6 @@
 @stop
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('vendor/almasaeed2010/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-<script src="{{ asset('vendor/almasaeed2010/adminlte/plugins/select2/js/select2.js') }}"></script>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -284,12 +282,6 @@
 </div>
   @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-     <!-- Select2 -->
-  <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-@stop
 
 @section('js')
     <script>

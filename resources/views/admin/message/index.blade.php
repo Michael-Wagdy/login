@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('admin.layouts.master')
 
 @section('title', 'message Managment')
 
@@ -46,7 +46,7 @@
                       <td>{{$message->subject}}</td>
                       <td>
                       <button type="button" name="status" class="btn btn-default"  data-id="{{ $message->id }}">
-  <span class=" glyphicon glyphicon-envelope " style="color: {{ $message->status === 1 ? 'blue;' : 'black;' }}" aria-hidden="true"></span>
+  <span class="fas fa-envelope " style="color: {{ $message->status === 1 ? 'blue;' : 'black;' }}" aria-hidden="true"></span>
 </button>
 </td> 
                       <td>

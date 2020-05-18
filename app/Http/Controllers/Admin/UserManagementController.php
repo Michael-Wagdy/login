@@ -104,10 +104,11 @@ class UserManagementController extends Controller
         $user= User::find($id);
         return view('admin.users.edit',compact('user'));
     }
-    public function delete($id){
+    public function destroy($id){
         $user= User::find($id);
 
         $user->delete();
-        return back(); 
+        return response()->json(['message' => 'user has been deleted successfully.']);
+
     }
 }

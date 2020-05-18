@@ -108,4 +108,8 @@ class AgencyManagementController extends Controller
         return back()->with('sucess','you have updated an agency accounts');
 
     }
+    public function destory($id){
+        Agency::find($id)->delete();
+        return response()->json(['message'=>'agency account has been deleted ']);
+    }
 }

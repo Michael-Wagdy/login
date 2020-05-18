@@ -113,7 +113,7 @@ class OfferManagementController extends Controller
         //
         $offer = Offer::find($id);
         $offer->delete();
-        return back()->with(['success' =>'you have deleted an offer']);
+        return response()->json(['message' => 'offer has been deleted successfully.']);
 
     }
 }

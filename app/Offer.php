@@ -3,12 +3,13 @@
 namespace App;
 
 use Illuminate\Support\Carbon;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
     //
+    use SoftDeletes;
     protected $dates = [ 'start_date','end_date','created_at', 'updated_at','deleted_at']; 
     protected $fillable = [
         'name','agency_price', 'user_price','start_date','end_date','no_rooms','status','agency_id'
@@ -36,7 +37,7 @@ class Offer extends Model
         Carbon::create($input)->toDateTimeString();
     }
     // public function getEndDateAttribute($input)
-    // {
+     // {
     //     return         Carbon::create($input)->format('l jS \\of F Y h:i A');
 
     // }

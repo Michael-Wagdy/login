@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('admin.layouts.master')
 
 @section('title', 'Agencies Managment')
 
@@ -39,18 +39,16 @@
                   </thead>
                   <tbody>
                     @foreach($agenies as $agency)
-                    <tr>
+                    <tr id="{{$agency->id}}">
                       <td>{{$agency->id}}</td>
                       <td>{{$agency->name}}</td>
                       <td>{{$agency->address}}</td>
                       <td>{{$agency->email}}</td>
                       <td>{{$agency->phone}}</td>
                       <td>
-                      <form action="{{ route('admin.agency.delete', $agency->id) }}" method="POST" onsubmit="return confirm('areYouSure');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="delete"></form>
-                                        <a  href="{{route('admin.agency.edit',$agency->id)}}"class="btn btn-xs btn-info" >Info</a>
+                      <button type="button" name="delete" class="btn btn-xs btn-danger" data-token="{{ csrf_token() }}"  data-id="{{ $agency->id }}">delete</button>
+
+                      <a  href="{{route('admin.agency.edit',$agency->id)}}"class="btn btn-xs btn-info" >Info</a>
 
                       </td>
                     </tr>
@@ -66,10 +64,37 @@
         <!-- /.row -->
         @stop
 
-@section('css')
+
+        @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
-
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+$(document).ready(function(){
+    $("button").click(function () {
+      
+let id = $(this).data('id');
+let  token = $(this).data("token");
+console.log(id);
+$.ajax(
+{
+    url: "delete/"+id,
+    type: 'DELETE', // Just delete Latter Capital Is Working Fine
+    dataType: "JSON",
+    data: {
+        "id": id ,// method and token not needed in data
+        "_token": token,
+    },
+    success: function (response)
+    {
+        console.log(response); // see the reponse sent
+        $("#"+id).remove();
+
+    }
+   
+});
+});
+});
+
+</script>
 @stop

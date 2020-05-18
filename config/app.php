@@ -14,7 +14,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'logo' => '/plugins/adminlte/img/AdminLTELogo.png',
 
+
+       
     /*
     |--------------------------------------------------------------------------
     | Application Environment

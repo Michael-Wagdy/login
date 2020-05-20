@@ -14,4 +14,8 @@ yarn-error.log
 .idea/*
 composer.phar
 /.well-known/*
+<<<<<<< HEAD
 composer.lock
+=======
+composer.lock
+>>>>>>> fddc5532a5a2d1e8748e0f2de13c6fffc96bf190

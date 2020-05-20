@@ -31,7 +31,8 @@
                     <tr>
                       <th>ID</th>
                       <th>category</th>
-                      <th>Actions</th>
+                      <th>parent</th>
+                      <th>Actions</th> 
                     </tr>
                   </thead>
                   <tbody>
@@ -39,6 +40,7 @@
                     <tr id="{{$category->id}}">
                       <td>{{$category->id}}</td>
                       <td>{{$category->name}}</td>
+                      <td>  {{($category->categoryParent) ? $category->categoryParent->name : '-'}} </td>
                     
                       <td>
                       <button  class="btn btn-xs btn-danger" data-token="{{ csrf_token() }}" data-id="{{$category->id}}">delete</button>

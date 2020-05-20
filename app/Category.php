@@ -20,5 +20,11 @@ class Category extends Model
     public function OfferCategories(){
         return $this->belongsToMany(Offer::class,'offer_category','offer_id','category_id');
     }
-
+    public function categoryParent(){
+        return $this->belongsTo('App\Category', 'parent_id');
+    }
+    
+    public function categoryChildren(){
+        return $this->hasMany('App\Category', 'parent_id');
+    }
 }

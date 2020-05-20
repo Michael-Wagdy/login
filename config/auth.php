@@ -53,6 +53,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'apiadmin' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+            'hash' => false,
+        ]
     ],
 
     /*

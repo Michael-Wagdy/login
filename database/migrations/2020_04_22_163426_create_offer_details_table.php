@@ -15,7 +15,7 @@ class CreateOfferDetailsTable extends Migration
     {
         Schema::create('offer_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('offer_id', 'agency_fk_718190')->references('id')->on('Offers')->onDelete('cascade');
+            $table->foreign('offer_id', 'agency_fk_718190')->references('id')->on('offers')->onDelete('cascade');
             $table->unsignedBigInteger('offer_id');  
             $table->dateTime('Departial_time'); 
             $table->dateTime('arrival_time'); 

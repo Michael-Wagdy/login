@@ -21,6 +21,7 @@ Route::post('logout','AdminController@logout')->name('adminlogout');
 //dashboard 
 
 Route::get('dashboard', 'AdminController@countAdmins')->middleware('Authadmin:webadmin');
+Route::get('/', 'AdminController@countAdmins')->middleware('Authadmin:webadmin');
 
 });
 // user management 

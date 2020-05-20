@@ -12,7 +12,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('create offer') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.offer.create') }}"  enctype="multipart/form-data">
@@ -127,7 +127,7 @@
                             <label for="agency" class="col-md-4 col-form-label ">{{ __('agency') }}</label>
 
                             <div class="col-md-8">
-                                <select id="agency" class="form-control @error('agency') is-invalid @enderror" name="agency" value="{{ old('agency') }}" >
+                                <select id="agency" class="form-control @error('agency') is-invalid @enderror" name="agency" value="{{ old('agency') }}"  required>
                                 <option value disabled {{ old('agency', null) === null ? 'selected' : '' }}> Please select a agency </option>
                                 @foreach(App\Agency::all() as $agency)
                                 <option value={{ $agency->id }} >{{ $agency->name }}</option>
@@ -147,7 +147,7 @@
                   <label  class="col-md-4 col-form-label ">category</label>
                   <div class="col-md-8">
 
-                  <select class="select2" name="category[]" multiple="category" data-placeholder="Select a State" style="width: 100%;">
+                  <select class="select2" name="category[]" multiple="category" data-placeholder="Select a State" style="width: 100%;" required>
                                   @foreach(App\category::all() as $category)
                                 <option value={{ $category->id }} >{{ $category->name }}</option>
                                 @endforeach
@@ -163,7 +163,7 @@
                             <label for="transportation_mode" class="col-md-4 col-form-label ">{{ __('transportation mode') }}</label>
 
                             <div class="col-md-8">
-                                <select id="transportation_mode" class="form-control @error('transportation_mode') is-invalid @enderror" name="transportation_mode[]" value="{{ old('transportation_mode') }}" >
+                                <select id="transportation_mode" class="form-control @error('transportation_mode') is-invalid @enderror" name="transportation_mode[]" value="{{ old('transportation_mode') }}" required>
                                 <option value disabled {{ old('transportation_mode', null) === null ? 'selected' : '' }}> Please select a transportation </option>
                                 @foreach(App\offer::Transporation_SELECT as $key => $label)
                                 <option value={{ $key }} >{{ $label }}</option>
@@ -255,7 +255,7 @@
                             <label for="photo" class="col-md-4 col-form-label">{{ __('Photos') }}</label>
 
                             <div class="col-md-8">
-                                <input id="photo" type="file"  accept="image/*" class="form-control @error('photo') is-invalid @enderror" name="photos[]" multiple>
+                                <input id="photo" type="file"  accept="image/*" class="form-control @error('photo') is-invalid @enderror" name="photos[]" multiple required>
                             </div>  
                             
                             </div>  
@@ -263,7 +263,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('create') }}
                                 </button>
                             </div>
                         </div>

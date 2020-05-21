@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
@@ -50,8 +48,28 @@ class CategoryManagementController extends Controller
 
     }
     public function destory($id){
-        $categorry= Category::findOrFail($id)->delete();
-        return response()->json(['message'=> 'you have deleted a category']);
+      /*  try {
+            Category::findOrFail($id)->delete();
+            return response()->json(['message'=> 'you have deleted a category']);
+
+           } 
+       catch (\Illuminate\Database\QueryException $e) {
+       
+               if($e->getCode() == "23000"){ //23000 is sql code for integrity constraint violation
+                   // return error to user here
+                   return response()->json(['message'=> 'you can not delete a category has child']);
+               }
+               }*/
+                $category = Category::findOrFail($id);
+               if(count($category->categoryChildren)){
+                return response()->json(['message'=>'you can not delete a category has childs'],500);
+
+               }else{
+                $category->delete();
+                return response()->json(['message'=>'you have deleted this item']);
+
+               }
+           
     }
 
 }

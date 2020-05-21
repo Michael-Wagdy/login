@@ -84,6 +84,9 @@ $.ajax(
         console.log(response); // see the reponse sent
         $("#"+id).remove();
 
+    },
+    error: function (xhr,response){
+     alert(xhr.responseJSON.message);
     }
    
 });

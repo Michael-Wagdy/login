@@ -17,11 +17,11 @@ class CreateOfferCategoryTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('offer_id');
 
-            $table->foreign('offer_id', 'offer_id_fk_702184')->references('id')->on('offers')->onDelete('cascade');
+            $table->foreign('offer_id', 'offer_id_fk_702184')->references('id')->on('offers')->onDelete('restrict');
 
             $table->unsignedBigInteger('category_id');
 
-            $table->foreign('category_id', 'category_id_fk_702184')->references('id')->on('categories');
+            $table->foreign('category_id', 'category_id_fk_702184')->references('id')->on('categories')->onDelete('restrict');
         });
     }
 

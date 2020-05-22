@@ -17,9 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/admin/login', 'Api\AdminController@login');
-Route::post('/agency/login', 'Api\AgencyController@login');
 
-Route::group(['middleware'=>'auth:api'], function(){
+Route::group(['middleware'=>['Authadmin','auth:api','scopes:admin']], function(){
 Route::get('/category','Api\CategoryManagementController@index');
 Route::get('/category/{id}','Api\CategoryManagementController@show');
 Route::post('/category/create','Api\CategoryManagementController@store');

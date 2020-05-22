@@ -56,7 +56,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapUserRoutes();
 
         $this->mapAgencyRoutes();
-
+        $this->mapApiAgencyRoutes();
         //
     }
 
@@ -89,6 +89,21 @@ class RouteServiceProvider extends ServiceProvider
              ->group(base_path('routes/api.php'));
     }
 
+    
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiAgencyRoutes()
+    {
+        Route::prefix('api/agency')
+             ->middleware('api')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/apiAgency.php'));
+    }
     protected function mapUserRoutes()
     {
         Route::prefix('user')

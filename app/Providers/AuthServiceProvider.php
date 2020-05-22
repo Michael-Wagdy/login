@@ -28,6 +28,10 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
         // Passport::hashClientSecrets();
         Passport::tokensExpireIn(now()->addDays(15));
+        Passport::tokensCan([
+            'admin' => 'admin managment',
+            'agency' => 'agency managment',
+        ]);
 
         Passport::refreshTokensExpireIn(now()->addDays(30));
     

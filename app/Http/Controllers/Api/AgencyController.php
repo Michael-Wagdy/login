@@ -29,7 +29,7 @@ class AgencyController extends Controller
             if(!Auth::guard('webagency')->attempt($credentials))
             return response()->json(['message' => 'Unauthorized' ], 401);
       $admin  = Auth::guard('webagency')->user();
-        $tokenResult = $admin->createToken('Personal Access Token');
+        $tokenResult = $admin->createToken('Agency Access Token',['agency']);
         $token = $tokenResult->token;
         if ($request->remember_me)
         $token->expires_at = Carbon::now()->addWeeks(1);
@@ -59,7 +59,7 @@ class AgencyController extends Controller
      *
      * @return [json] user object
      */
-    public function admin(Request $request)
+    public function agency(Request $request)
     {
         return response()->json($request->user());
     }

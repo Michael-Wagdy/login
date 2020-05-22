@@ -29,7 +29,7 @@ class AdminController extends Controller
             if(!Auth::guard('webadmin')->attempt($credentials))
             return response()->json(['message' => 'Unauthorized' ], 401);
       $admin  = Auth::guard('webadmin')->user();
-        $tokenResult = $admin->createToken('Personal Access Token');
+        $tokenResult = $admin->createToken('Admin Access Token',['admin']);
         $token = $tokenResult->token;
         if ($request->remember_me)
         $token->expires_at = Carbon::now()->addWeeks(1);

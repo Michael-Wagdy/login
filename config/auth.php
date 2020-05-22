@@ -52,10 +52,9 @@ return [
             'driver' => 'passport',
             'provider' => 'admins',
         ],
-        'apiadmin' => [
-            'driver' => 'token',
-            'provider' => 'admins',
-            'hash' => false,
+        'api-agency' => [
+            'driver' => 'passport',
+            'provider' => 'agencies',
         ]
     ],
 

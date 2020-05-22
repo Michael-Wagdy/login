@@ -20,6 +20,7 @@ class CategoryServices {
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255','unique:categories'],
+            'parent_id' =>['present']
            
         ]);
 

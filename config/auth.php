@@ -49,9 +49,8 @@ return [
             'provider' => 'agencies',
         ],
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
+            'driver' => 'passport',
+            'provider' => 'admins',
         ],
         'apiadmin' => [
             'driver' => 'token',

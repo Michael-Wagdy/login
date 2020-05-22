@@ -30,15 +30,23 @@
                                 @enderror
                             </div>
                         </div>
-
+            
                         <div class="form-group row">
                             <label for="parent" class="col-md-4 col-form-label ">{{ __('parent (opitional) ') }}</label>
-
                         <div class="col-md-8">
                                 <select id="parent" class="form-control @error('parent') is-invalid @enderror" name="parent">
                                 <option value disabled {{ $category->parent_id === null ? 'selected' : '' }}> Please select a parent category </option>
-                                @foreach($categories as $category)
-                                <option value="{{$category->id}}" >{{ $category->name }}</option>
+                                @foreach($categories as $cat)
+                                <!-- prevent admin to choose category parent to be the current category -->
+                                @if($category->id == $cat->id)
+                                    @continue
+                                @endif
+                            <!-- prevent admin to choose category parent that's currently child for it -->
+
+                                @if(in_array (  $cat->toArray(),$category->categoryChildren->toArray()))
+                                @continue
+                                @endif
+                                <option value="{{$cat->id}}" >{{ $cat->name }}</option>
                                 @endforeach
                                 </select>
 

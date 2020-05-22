@@ -44,7 +44,7 @@
                     
                       <td>
                       <button  class="btn btn-xs btn-danger" data-token="{{ csrf_token() }}" data-id="{{$category->id}}">delete</button>
-                      <a  href="{{route('admin.category.edit',$category->id)}}"class="btn btn-xs btn-info" >Info</a>
+                      <a  href="{{route('admin.category.edit',$category->id)}}"class="btn btn-xs btn-info" >Edit</a>
                       </td>
                     </tr>
                     @endforeach
